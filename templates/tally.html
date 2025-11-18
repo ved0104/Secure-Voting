@@ -1,0 +1,30 @@
+{% extends 'base.html' %} {% block content %}
+<section class="card">
+  <h2>Tally & Hash Chain</h2>
+  <div class="tally">
+    <h3>Results</h3>
+    {% if results %}
+    <ul>
+      {% for k, v in results.items() %}
+      <li>{{k}} : {{v}}</li>
+      {% endfor %}
+    </ul>
+    {% else %}
+    <p>No accepted votes yet.</p>
+    {% endif %}
+
+    <h3>Hash Chain</h3>
+    {% if chain %}
+    <ol>
+      {% for c in chain %}
+      <li><strong>{{ c.vote }}</strong> ({{c.voter}}) — {{ c.hash }}</li>
+      {% endfor %}
+    </ol>
+    {% else %}
+    <p>Chain is empty.</p>
+    {% endif %}
+
+    <button id="clearBtn">Clear Votes</button>
+  </div>
+</section>
+{% endblock %}

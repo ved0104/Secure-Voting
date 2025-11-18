@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Secure Voting — Dark UI</title>
+    <link rel="stylesheet" href="/static/css/dark.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header class="app-header">
+        <h1>Secure Voting</h1>
+        <nav>
+          <a href="/">Vote</a>
+          <a href="/tally">Tally & Chain</a>
+        </nav>
+      </header>
+      <main>{% block content %}{% endblock %}</main>
+      <footer class="app-footer">Built for demo • All data in-memory</footer>
+    </div>
+    <script src="/static/js/main.js"></script>
+  </body>
+</html>

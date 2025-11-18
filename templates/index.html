@@ -1,0 +1,16 @@
+{% extends 'base.html' %} {% block content %}
+<section class="card">
+  <h2>Cast a Vote</h2>
+  <input type="hidden" id="current_voter" value="voter1">
+
+  <label for="vote_option">Select your vote:</label>
+  <select id="vote_option">
+    <option value="Alice">Alice</option>
+    <option value="Bob">Bob</option>
+  </select>
+
+  <button id="submitBtn" class="primary">Submit Vote</button>
+
+  <div id="status" class="status"></div>
+</section>
+{% endblock %}
