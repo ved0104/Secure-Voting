@@ -1,6 +1,23 @@
-{% extends 'base.html' %} {% block content %}
+{% extends 'base.html' %}
+{% block content %}
 <section class="card">
   <h2>Tally & Hash Chain</h2>
+
+  {% if tampered %}
+  <div
+    style="
+      background: #ff3b3b;
+      padding: 12px;
+      border-radius: 8px;
+      color: white;
+      font-weight: bold;
+      margin-bottom: 15px;
+    "
+  >
+    ⚠️ HASH CHAIN BROKEN — TAMPERING DETECTED
+  </div>
+  {% endif %}
+
   <div class="tally">
     <h3>Results</h3>
     {% if results %}
@@ -13,18 +30,34 @@
     <p>No accepted votes yet.</p>
     {% endif %}
 
-    <h3>Hash Chain</h3>
+    <h3>Hash Chain (stored vs expected)</h3>
     {% if chain %}
     <ol>
       {% for c in chain %}
-      <li><strong>{{ c.vote }}</strong> ({{c.voter}}) — {{ c.hash }}</li>
+      <li>
+        <strong>Index {{ c.index }} —</strong>
+        Voter: {{ c.voter }} —
+        Vote: <em>{{ c.vote_plain }}</em>
+        <br />
+        Stored hash: <code>{{ c.stored_hash }}</code>
+        <br />
+        Recomputed (expected) hash: <code>{{ c.expected_hash }}</code>
+        <br />
+        {% if c.entry_tampered %}
+          <span style="color:#fff;background:#e64a4a;padding:4px;border-radius:4px;font-weight:bold;">TAMPERED</span>
+        {% else %}
+          <span style="color:#0f9d58;font-weight:bold;">OK</span>
+        {% endif %}
+      </li>
       {% endfor %}
     </ol>
     {% else %}
     <p>Chain is empty.</p>
     {% endif %}
-
-    <button id="clearBtn">Clear Votes</button>
+    <div style="margin-top:12px">
+      <button id="tamperBtn" style="margin-right:8px">Tamper Chain</button>
+      <button id="clearBtn">Clear Votes</button>
+    </div>
   </div>
 </section>
 {% endblock %}

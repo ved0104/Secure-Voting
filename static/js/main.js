@@ -41,9 +41,13 @@ async function submitVote() {
     }
 }
 
-
 async function clearVotes() {
     await fetch('/api/clear', { method:'POST' });
+    window.location.reload();
+}
+
+async function tamperChain() {
+    await fetch('/tamper', { method: 'POST' });
     window.location.reload();
 }
 
@@ -53,4 +57,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
     const clear = document.getElementById('clearBtn');
     if (clear) clear.addEventListener('click', clearVotes);
+
+    const t = document.getElementById('tamperBtn');
+    if (t) t.addEventListener('click', tamperChain);
 });
